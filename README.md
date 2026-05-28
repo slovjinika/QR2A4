@@ -31,5 +31,3 @@ Output: print/labels_a4.pdf
 Notes
 - Adjust QR_SCALE_FACTOR or TEXT_ZONE_RATIO to change QR/text balance.
 - Margins and BOTTOM_ROW_SHIFT_MM tuned for typical printers — tweak if needed.
-
-![image](qrcode-105x99-20260528.jpg)

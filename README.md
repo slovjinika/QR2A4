@@ -28,7 +28,7 @@ python3 105x99-gen-qrcode-rotate.py
 ```
 Output: print/labels_a4.pdf
 
-![image](screen.jpg)
+![image](demo.png)
 
 Notes
 - Adjust QR_SCALE_FACTOR or TEXT_ZONE_RATIO to change QR/text balance.

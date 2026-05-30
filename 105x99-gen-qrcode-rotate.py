@@ -47,9 +47,9 @@ QR_PADDING_MM = 2      # MINIMAL QR code padding from the border (was 2.0)
 QR_SCALE_FACTOR = 1   # Stretch QR to 100% of available zone (was 0.8)
 
 # --- INDIVIDUAL ROW VERTICAL SHIFTS (IN MILLIMETERS) ---
-ROW_1_SHIFT_MM = 0.0     # Регулировка для 1-го (верхнего) ряда блоков
-ROW_2_SHIFT_MM = 0.0     # Регулировка для 2-го (среднего) ряда блоков
-ROW_3_SHIFT_MM = 7.5     # Регулировка для 3-го (нижнего) ряда блоков (бывший BOTTOM_ROW_SHIFT)
+ROW_1_SHIFT_MM = 0.0
+ROW_2_SHIFT_MM = 0.0
+ROW_3_SHIFT_MM = 7.5
 
 # ==========================================
 # AUTOMATIC CONVERSION TO PIXELS

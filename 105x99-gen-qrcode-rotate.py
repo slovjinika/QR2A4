@@ -35,8 +35,8 @@ STICKER_W_MM = 38.0
 STICKER_H_MM = 42.0
 BORDER_MM = 0.5
 
-GAP_X_MM = 4.0
-GAP_Y_MM = 4.0
+GAP_X_MM = 2
+GAP_Y_MM = 2
 
 # --- MAXIMUM FILLING (REMOVING EMPTY SPACE) ---
 TEXT_ZONE_RATIO = 0.16   # Slightly reduced text zone to allocate more space for QR
@@ -46,8 +46,10 @@ TEXT_Y_SHIFT_MM = -1.7   # Text position correction
 QR_PADDING_MM = 2      # MINIMAL QR code padding from the border (was 2.0)
 QR_SCALE_FACTOR = 1   # Stretch QR to 100% of available zone (was 0.8)
 
-# Shift for the bottom row blocks (1 cm = 10 mm)
-BOTTOM_ROW_SHIFT_MM = 8.0
+# --- INDIVIDUAL ROW VERTICAL SHIFTS (IN MILLIMETERS) ---
+ROW_1_SHIFT_MM = 0.0     # Регулировка для 1-го (верхнего) ряда блоков
+ROW_2_SHIFT_MM = 0.0     # Регулировка для 2-го (среднего) ряда блоков
+ROW_3_SHIFT_MM = 7.5     # Регулировка для 3-го (нижнего) ряда блоков (бывший BOTTOM_ROW_SHIFT)
 
 # ==========================================
 # AUTOMATIC CONVERSION TO PIXELS
@@ -130,7 +132,6 @@ def create_sticker(text, font_path):
     )
     
     # Повертаємо готовий стікер на 90 градусів проти годинникової стрілки.
-    # Якщо потрібно за годинниковою стрілкою — змініть 90 на 270.
     return sticker.rotate(90, expand=True)
 
 # ==========================================
@@ -149,7 +150,7 @@ STICKERS_PER_BLOCK = 4
 
 sticker_idx = 0
 
-# Оскільки стікер повернуто на 90 градусів, його ширина та висота міняються місцями
+# Оскільки стікер повернуто на 90 градусів, його ширина та высота міняються місцями
 ROTATED_STICKER_W = STICKER_H
 ROTATED_STICKER_H = STICKER_W
 ROTATED_STICKER_W_MM = STICKER_H_MM
@@ -187,10 +188,12 @@ for idx, text in enumerate(data_list):
     
     sticker_x = int(block_left + (margin_x_mm * MM_TO_PX) + (sx * (ROTATED_STICKER_W + GAP_X_MM * MM_TO_PX)))
     sticker_y = int(block_top + (margin_y_mm * MM_TO_PX) + (sy * (ROTATED_STICKER_H + GAP_Y_MM * MM_TO_PX)))
-    
-    # If this is the bottom row (by == 2), shift the stickers 1 cm higher
-    if by == 2:
-        sticker_y -= int(BOTTOM_ROW_SHIFT_MM * MM_TO_PX)
+    if by == 0:
+        sticker_y -= int(ROW_1_SHIFT_MM * MM_TO_PX)
+    elif by == 1:
+        sticker_y -= int(ROW_2_SHIFT_MM * MM_TO_PX)
+    elif by == 2:
+        sticker_y -= int(ROW_3_SHIFT_MM * MM_TO_PX)
     
     sticker_img = create_sticker(text, FONT_PATH)
     current_page.paste(sticker_img, (sticker_x, sticker_y))
@@ -211,7 +214,7 @@ if DEBUG_GRID:
         # Create a temporary layer for semi-transparent lines
         overlay = Image.new("RGBA", page.size, (255, 255, 255, 0))
         draw = ImageDraw.Draw(overlay)
-        line_color = (255, 0, 255, 100)
+        line_color = (255, 0, 255, 100) # Purple transparent line
 
         # --- VERTICAL LINES (105 mm and 210 mm) ---
         x_105mm = int(105 * MM_TO_PX)

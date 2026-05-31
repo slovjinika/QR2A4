@@ -41,7 +41,7 @@ GAP_Y_MM = 1.5
 # --- MAXIMUM FILLING (REMOVING EMPTY SPACE) ---
 TEXT_ZONE_RATIO = 0.16   
 FONT_SIZE_PT = 10        # Slightly reduced font size for smaller 28mm sticker
-TEXT_Y_SHIFT_MM = -1.5   
+TEXT_Y_SHIFT_MM = -1.7   
 
 QR_PADDING_MM = 1.5      
 QR_SCALE_FACTOR = 1   
